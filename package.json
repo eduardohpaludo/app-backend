@@ -6,7 +6,10 @@
   "scripts": {
     "build": "tsc",
     "dev:server": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "migration:run": "typeorm -d ./src/database/data-source.ts migration:run",
+    "migration:create":"cd ./src/database/migrations && typeorm migration:create"
   },
   "keywords": [],
   "author": "",
