@@ -2,28 +2,31 @@ import { startOfHour } from "date-fns";
 import Appointment from "../models/Appointment";
 import AppointmentsRepository from "../repositories/AppointmentsRepository";
 import { AppDataSource } from "../database/data-source";
+import AppError from "../errors/AppError"
 
 interface RequestDTO {
-  provider: string
+  provider_id: string
   date: Date
 }
 
 class CreateAppointmentService {
 
-  public async execute({ provider, date }: RequestDTO): Promise<Appointment>{
-    const appointmentRepository = AppDataSource.getRepository(AppointmentsRepository)
+  public async execute({ provider_id, date }: RequestDTO): Promise<Appointment>{
 
     const appointmentDate = startOfHour(date)
 
-    const findAppointmentInSameDate = await AppointmentsRepository.findByDate(date)
+    const findAppointmentInSameDate = await AppointmentsRepository.findByDate(appointmentDate)
 
     if(findAppointmentInSameDate){
-      throw Error('This appointment is already booked')
+      throw new AppError('This appointment is already booked')
     }
-    const appointment = appointmentRepository.create({
-      provider,
+    const appointment = AppointmentsRepository.create({
+      provider_id,
       date: appointmentDate
     })
+
+    await AppointmentsRepository.save(appointment)
+
     return appointment
   }
 }
