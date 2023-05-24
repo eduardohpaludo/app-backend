@@ -1,6 +1,6 @@
 
-import { AppDataSource } from '../../../shared/database/data-source';
-import User from '../entities/User';
+import { AppDataSource } from '../../../shared/infra/typeorm/data-source';
+import User from '../infra/typeorm/entities/User';
 
 const UsersRepository = AppDataSource.getRepository(User)
 

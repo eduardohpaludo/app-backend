@@ -2,7 +2,7 @@ import path from "path"
 import UsersRepository from "../repositories/UsersRepository"
 import uploadConfig from "../../../config/upload"
 import fs from 'fs'
-import User from "../entities/User"
+import User from "../infra/typeorm/entities/User"
 import AppError from "../../../errors/AppError"
 
 interface Request {

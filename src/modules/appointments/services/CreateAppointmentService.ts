@@ -1,7 +1,7 @@
 import { startOfHour } from "date-fns";
-import Appointment from "../entities/Appointment";
+import Appointment from "../infra/typeorm/entities/Appointment";
 import AppointmentsRepository from "../repositories/AppointmentsRepository";
-import { AppDataSource } from "../../../shared/database/data-source";
+import { AppDataSource } from "../../../shared/infra/typeorm/data-source";
 import AppError from "../../../errors/AppError"
 
 interface RequestDTO {

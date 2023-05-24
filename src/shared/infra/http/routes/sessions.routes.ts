@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import AuthenticateUserService from '../services/AuthenticateUserService'
-import AppError from '../errors/AppError'
+import AppError from '../../../errors/AppError'
 
 const sessionsRouter = Router()
 
