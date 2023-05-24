@@ -9,31 +9,22 @@ const usersRouter = Router()
 const upload = multer(uploadConfig)
 
 usersRouter.post('/', async (request, response) => {
-  try{
+  const { name, email, password } = request.body
 
-    const { name, email, password } = request.body
+  const createUser = new CreateUserService()
 
-    const createUser = new CreateUserService()
+  const user = await createUser.execute({
+    name,
+    email,
+    password
+  })
 
-    const user = await createUser.execute({
-      name,
-      email,
-      password
-    })
-
-    const createdUser = {
-      ...user,
-      password: undefined
-    }
-
-    return response.json(createdUser)
-  } catch (err) {
-      if(err instanceof Error) {
-        return response.status(400).json({ error: err.message})
-      }else {
-        return response.status(500).json({ error: 'Internal server error'})
-      }
+  const createdUser = {
+    ...user,
+    password: undefined
   }
+
+  return response.json(createdUser)
 })
 
 usersRouter.patch('/avatar', ensureAuthenticated, upload.single('avatar'), async(request, response) => {
