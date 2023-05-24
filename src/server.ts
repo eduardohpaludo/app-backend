@@ -1,8 +1,8 @@
 import express, { NextFunction, Request, Response } from 'express'
-import routes from './routes'
+import routes from './shared/routes'
 import { AppDataSource } from './shared/database/data-source'
 import uploadConfig from './config/upload'
-import AppError from './errors/AppError'
+import AppError from './shared/errors/AppError'
 
 const app = express()
 app.use(express.json())
