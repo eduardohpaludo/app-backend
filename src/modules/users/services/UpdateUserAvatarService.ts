@@ -1,9 +1,9 @@
 import path from "path"
 import UsersRepository from "../repositories/UsersRepository"
-import uploadConfig from "../config/upload"
+import uploadConfig from "../../../config/upload"
 import fs from 'fs'
-import User from "../models/User"
-import AppError from "../errors/AppError"
+import User from "../entities/User"
+import AppError from "../../../errors/AppError"
 
 interface Request {
   user_id: string

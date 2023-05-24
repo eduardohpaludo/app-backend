@@ -1,8 +1,8 @@
 import { startOfHour } from "date-fns";
-import Appointment from "../models/Appointment";
+import Appointment from "../entities/Appointment";
 import AppointmentsRepository from "../repositories/AppointmentsRepository";
-import { AppDataSource } from "../database/data-source";
-import AppError from "../errors/AppError"
+import { AppDataSource } from "../../../shared/database/data-source";
+import AppError from "../../../errors/AppError"
 
 interface RequestDTO {
   provider_id: string

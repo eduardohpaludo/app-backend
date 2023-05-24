@@ -1,6 +1,6 @@
 import { Repository } from 'typeorm';
-import Appointment from "../models/Appointment";
-import { AppDataSource } from '../database/data-source';
+import Appointment from "../entities/Appointment";
+import { AppDataSource } from '../../../shared/database/data-source';
 
 // class AppointmentsRepository extends Repository<Appointment>{
 

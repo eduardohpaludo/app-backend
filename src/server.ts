@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express'
 import routes from './routes'
-import { AppDataSource } from './database/data-source'
+import { AppDataSource } from './shared/database/data-source'
 import uploadConfig from './config/upload'
 import AppError from './errors/AppError'
 
