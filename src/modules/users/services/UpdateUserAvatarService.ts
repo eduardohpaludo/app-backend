@@ -1,9 +1,9 @@
 import path from "path"
-import UsersRepository from "../repositories/UsersRepository"
-import uploadConfig from "../../../config/upload"
+import UsersRepository from "../infra/typeorm/repositories/UsersRepository"
+import uploadConfig from "@config/upload"
 import fs from 'fs'
-import User from "../infra/typeorm/entities/User"
-import AppError from "../../../errors/AppError"
+import User from "@modules/users/infra/typeorm/entities/User"
+import AppError from "@shared/errors/AppError"
 
 interface Request {
   user_id: string

@@ -1,8 +1,8 @@
 import { startOfHour } from "date-fns";
 import Appointment from "../infra/typeorm/entities/Appointment";
-import AppointmentsRepository from "../repositories/AppointmentsRepository";
-import { AppDataSource } from "../../../shared/infra/typeorm/data-source";
-import AppError from "../../../errors/AppError"
+import AppointmentsRepository from "../infra/typeorm/repositories/AppointmentsRepository";
+import { AppDataSource } from "@shared/infra/typeorm/data-source";
+import AppError from "@shared/errors/AppError"
 
 interface RequestDTO {
   provider_id: string

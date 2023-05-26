@@ -1,8 +1,10 @@
 import express, { NextFunction, Request, Response } from 'express'
+import 'express-async-errors'
+
 import routes from './routes'
-import { AppDataSource } from '../typeorm/data-source'
-import uploadConfig from '../../../config/upload'
-import AppError from '../../errors/AppError'
+import { AppDataSource } from '@shared/infra/typeorm/data-source'
+import uploadConfig from '@config/upload'
+import AppError from '@shared/errors/AppError'
 
 const app = express()
 app.use(express.json())

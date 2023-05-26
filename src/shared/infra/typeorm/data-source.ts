@@ -15,6 +15,6 @@ export const AppDataSource = new DataSource({
     entities: [Appointment, User],
     // subscribers: [],
     migrations: [
-      './src/database/migrations/*.ts'
+      './src/shared/infra/typeorm/migrations/*.ts'
     ],
 })
