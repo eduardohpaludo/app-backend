@@ -4,20 +4,24 @@ import User from "@modules/users/infra/typeorm/entities/User"
 import { sign } from "jsonwebtoken"
 import authConfig from "@config/auth"
 import AppError from "@shared/errors/AppError"
+import IUsersRepository from "../repositories/IUsersRepository"
 
 interface Request {
   email: string
   password: string
 }
 
-interface Response {
+interface IResponse {
   user: User
   token: string
 }
 
 class AuthenticateUserService {
-  public async execute({ email, password }: Request): Promise<Response>{
-    const user = await UsersRepository.findOne({ where: { email } })
+
+  constructor(private usersRepository: IUsersRepository){}
+
+  public async execute({ email, password }: Request): Promise<IResponse>{
+    const user = await this.usersRepository.findByEmail(email)
 
     if(!user) {
       throw new AppError('Incorret email/password combination.', 401)

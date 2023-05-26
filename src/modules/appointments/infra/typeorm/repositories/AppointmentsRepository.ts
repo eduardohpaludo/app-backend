@@ -1,29 +1,15 @@
-import { EntityRepository, Repository, getRepository } from 'typeorm';
-import Appointment from "../entities/Appointment";
-import { AppDataSource } from '@shared/infra/typeorm/data-source';
-import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
+import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
+import { AppDataSource } from '@shared/infra/typeorm/data-source';
+import { Repository } from 'typeorm';
+import Appointment from "../entities/Appointment";
 
-// class AppointmentsRepository extends Repository<Appointment> implements IAppointmentsRepository{
-
-//   public async findByDate(date: Date): Promise<Appointment | undefined> {
-
-//     const findAppointment = await this.findOne({
-//       where: { date }
-//     })
-
-//     return findAppointment || undefined
-//   }
-
-// }
 class AppointmentsRepository implements IAppointmentsRepository {
   private ormRepository: Repository<Appointment>
 
   constructor(){
     this.ormRepository = AppDataSource.getRepository(Appointment)
   }
-
-  //public repository = AppDataSource.getRepository(Appointment)
 
   public async find(): Promise<Appointment[]> {
 
