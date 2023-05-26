@@ -14,18 +14,18 @@ class CreateAppointmentService {
   public async execute({ provider_id, date }: RequestDTO): Promise<Appointment>{
 
     const appointmentDate = startOfHour(date)
+    const repository = new AppointmentsRepository()
+    console.log(repository)
 
-    const findAppointmentInSameDate = await AppointmentsRepository.findByDate(appointmentDate)
+    const findAppointmentInSameDate = await repository.findByDate(appointmentDate)
 
     if(findAppointmentInSameDate){
       throw new AppError('This appointment is already booked')
     }
-    const appointment = AppointmentsRepository.create({
+    const appointment = repository.create({
       provider_id,
       date: appointmentDate
     })
-
-    await AppointmentsRepository.save(appointment)
 
     return appointment
   }
