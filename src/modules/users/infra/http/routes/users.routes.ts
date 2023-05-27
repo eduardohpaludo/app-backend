@@ -5,53 +5,17 @@ import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthentica
 import CreateUserService from '@modules/users/services/CreateUserService'
 import UpdateUserAvatarService from '@modules/users/services/UpdateUserAvatarService'
 import UsersRepository from '../../typeorm/repositories/UsersRepository'
+import { container } from 'tsyringe'
+import UsersController from '../controllers/UsersController'
+import UserAvatarController from '../controllers/UserAvatarController'
 
 const usersRouter = Router()
 const upload = multer(uploadConfig)
-const usersRepository = new UsersRepository()
+const usersController = new UsersController()
+const userAvatarController = new UserAvatarController()
 
-usersRouter.post('/', async (request, response) => {
-  const { name, email, password } = request.body
+usersRouter.post('/', usersController.create)
 
-  const createUser = new CreateUserService(usersRepository)
-
-  const user = await createUser.execute({
-    name,
-    email,
-    password
-  })
-
-  const createdUser = {
-    ...user,
-    password: undefined
-  }
-
-  return response.json(createdUser)
-})
-
-usersRouter.patch('/avatar', ensureAuthenticated, upload.single('avatar'), async(request, response) => {
-  console.log(request.file)
-  try {
-    const updateUserAvatar = new UpdateUserAvatarService(usersRepository)
-
-    const user = await updateUserAvatar.execute({
-      user_id: request.user.id,
-      avatarFilename: request.file?.filename as string,
-    })
-
-    const updatedUser = {
-      ...user,
-      password: undefined
-    }
-
-    return response.json(updatedUser)
-  } catch (err) {
-      if(err instanceof Error) {
-        return response.status(400).json({ error: err.message})
-      }else {
-        return response.status(500).json({ error: 'Internal server error'})
-      }
-  }
-})
+usersRouter.patch('/avatar', ensureAuthenticated, upload.single('avatar'), userAvatarController.update)
 
 export default usersRouter
