@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { Column, CreateDateColumn, Entity, Generated, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 import User from '@modules/users/infra/typeorm/entities/User'
 

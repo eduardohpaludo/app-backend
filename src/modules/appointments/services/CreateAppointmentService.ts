@@ -1,8 +1,9 @@
+import 'reflect-metadata';
 import AppError from "@shared/errors/AppError";
 import { startOfHour } from "date-fns";
 import Appointment from "../infra/typeorm/entities/Appointment";
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
-import { injectable, inject } from "tsyringe";
+import { injectable, inject } from 'tsyringe';
 
 interface IRequestDTO {
   provider_id: string
